@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vehicle Log Menu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleet Vehicle Log</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
       text-align: center;
-      padding: 2em;
     }
     .container {
       max-width: 400px;
       margin: auto;
-      padding: 1em;
       border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     h1 {
-      font-size: 1.5em;
+      font-size: 1.4em;
+      margin-bottom: 0.5rem;
+    }
+    .tag {
+      font-weight: bold;
+      margin-bottom: 1rem;
     }
     button {
       display: block;
       width: 100%;
-      margin: 1em 0;
-      padding: 1em;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
       font-size: 1em;
-      border: none;
-      background: #4CAF50;
+      background-color: #2a9d8f;
       color: white;
-      border-radius: 5px;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
     }
     button:hover {
-      background: #45a049;
-    }
-    .tag {
-      margin-bottom: 1em;
-      font-weight: bold;
-      font-size: 1.2em;
+      background-color: #21867a;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="tag" id="tagDisplay">Loading tag...</div>
-    <button id="mileageBtn">Enter Start-of-Day Mileage</button>
-    <button id="maintenanceBtn">Report Maintenance</button>
-    <button id="fuelBtn">Log Fuel Purchase</button>
+    <h1>Fleet Vehicle Log</h1>
+    <div class="tag" id="tagDisplay">Loading...</div>
+    <button onclick="submitMileage()">Enter Start-of-Day Mileage</button>
+    <button onclick="submitMaintenance()">Report Maintenance</button>
+    <button onclick="submitFuel()">Log Fuel Purchase</button>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const tag = params.get('tag') || 'UNKNOWN';
-    document.getElementById('tagDisplay').textContent = `Vehicle Tag: ${tag}`;
+    const tag = params.get("tag") || "UNKNOWN";
+    document.getElementById("tagDisplay").textContent = "Vehicle Tag: " + tag;
 
-    // Replace with your actual Google Form links
-    const mileageURL = `https://forms.gle/yourMileageFormID?usp=pp_url&entry.X=${tag}`;
-    const maintenanceURL = `https://forms.gle/yourMaintenanceFormID?usp=pp_url&entry.Y=${tag}`;
-    const fuelURL = `https://forms.gle/yourFuelFormID?usp=pp_url&entry.Z=${tag}`;
+    const mileageLink = "https://docs.google.com/forms/d/e/1FAIpQLScVobEUZV3DbXZBh8uM6y_5DLzO6KKzJ0HgEtqZm8KSw-7nYw/viewform?usp=pp_url&entry.436725206=" + encodeURIComponent(tag);
+    const maintenanceLink = "https://docs.google.com/forms/d/e/1FAIpQLSd_3Zz9hUwBiHRgOavhd5vpHAsNkeuzcgzRXAabPvDo0MZ-HA/viewform?usp=pp_url&entry.1031161895=" + encodeURIComponent(tag);
+    const fuelLink = "https://docs.google.com/forms/d/e/1FAIpQLSfaYJzNSMNqxUSPLGAFGyvnvOQhI0qxZGr1qC5COpJ_M4DGqg/viewform?usp=pp_url&entry.1712014595=" + encodeURIComponent(tag);
 
-    document.getElementById('mileageBtn').onclick = () => window.location.href = mileageURL;
-    document.getElementById('maintenanceBtn').onclick = () => window.location.href = maintenanceURL;
-    document.getElementById('fuelBtn').onclick = () => window.location.href = fuelURL;
+    function submitMileage() {
+      window.location.href = mileageLink;
+    }
+
+    function submitMaintenance() {
+      window.location.href = maintenanceLink;
+    }
+
+    function submitFuel() {
+      window.location.href = fuelLink;
+    }
   </script>
 </body>
 </html>
